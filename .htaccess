@@ -1,0 +1,25 @@
+# Paksa HTTPS untuk semua request
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# HSTS
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+# Blokir akses file tersembunyi & folder deploy
+RewriteRule ^(\.|__pycache__|node_modules|vendor) - [F,L]
+
+# MIME untuk file static
+AddType application/javascript .js
+
+# ---- Proteksi panel analytics (opsional, disarankan) ----
+# Buka komentar di bawah untuk mengunci /panel.html dengan password sungguhan
+# (passcode di panel.html hanya cek di JS & bisa dibaca sumbernya).
+# 1) Buat file password:  htpasswd -c /var/www/html/.htpasswd-panel arga
+# 2) Buka komentar blok ini:
+# <Files panel.html>
+#     AuthType Basic
+#     AuthName "Panel"
+#     AuthUserFile /var/www/html/.htpasswd-panel
+#     Require valid-user
+# </Files>

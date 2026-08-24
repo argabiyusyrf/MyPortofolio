@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" data-theme="studio">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#ece7dc">
+	<meta name="description" content="Arazel Store — a full-featured e-commerce platform built from first principles in pure PHP. Auth, cart, checkout, and a lean admin panel without a heavy framework.">
+	<meta property="og:title" content="Arazel Store — Zero-Dependency E-Commerce Core">
+	<meta property="og:description" content="Hand-rolled MVC e-commerce: auth, cart, checkout, admin. No framework, no composer bloat.">
+	<title>Arazel Store — Zero-Dependency E-Commerce Core</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/project.css">
+</head>
+<body>
+
+	<header class="topbar">
+		<a class="topbar-back magnetic" href="/">
+			<span class="ico">←</span>
+			<span>arg<span style="color:var(--accent)">/</span></span>
+		</a>
+		<span class="topbar-tag">case study · 01</span>
+		<button class="theme-toggle" id="theme-toggle" aria-label="Switch theme">Studio</button>
+	</header>
+
+	<main>
+		<section class="pj-hero">
+			<div class="wrap">
+				<p class="pj-kicker" data-reveal><span class="dot"></span>Full-stack e-commerce · pure PHP</p>
+				<h1 class="pj-title" data-reveal>Arazel<em>Store.</em></h1>
+				<p class="pj-sub" data-reveal>A complete online store written from first principles in plain PHP — authentication, cart state, checkout, and a lean admin panel — with zero heavy frameworks and zero composer bloat. Designed to stay fast on cheap iron.</p>
+
+				<div class="pj-meta" data-reveal>
+					<div class="m-item"><span class="m-label">Year</span><span class="m-value">2024</span></div>
+					<div class="m-item"><span class="m-label">Role</span><span class="m-value">Full-stack engineer</span></div>
+					<div class="m-item"><span class="m-label">Stack</span><span class="m-value">PHP 8.2 · MySQL · Nginx</span></div>
+				</div>
+
+				<div class="pj-cta" data-reveal>
+					<a class="btn btn-dark" href="mailto:argaabiyyu4@gmail.com"><span>Request demo</span><span class="ico">↗</span></a>
+					<a class="btn btn-ghost" href="/"><span>Back to portfolio</span><span class="ico">→</span></a>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">01</span>
+					<h2 data-reveal>The <em>problem</em> &amp; the decision</h2>
+				</div>
+				<div class="pj-body">
+					<span class="sticky-label" data-reveal>Context</span>
+					<div data-reveal>
+						<p>Every e-commerce template I found was either a heavyweight framework (Laravel, Symfony) with hundreds of dependencies, or a drag-and-drop builder that hides everything that matters. Neither fit the constraint that matters most here: <strong>a store that loads fast on a $6 VPS and stays maintainable without a dependency graph the size of a novel.</strong></p>
+						<p>So I wrote the core myself. A front controller, a tiny router, a PDO layer, a session engine — nothing that isn't strictly needed. The result is a store with no cold starts, no artisan commands, and no mystery between the request and the response.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">02</span>
+					<h2 data-reveal>Core <em>architecture</em></h2>
+				</div>
+				<div class="pillars">
+					<div class="pillar" data-reveal>
+						<span class="p-index">01 — Routing</span>
+						<h3>Hand-rolled lightweight MVC</h3>
+						<p>A single front controller dispatches every request through modular controllers and views. No framework magic — every layer is plain PHP you can read in one sitting.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">02 — Data</span>
+						<h3>PDO-based MySQL layer</h3>
+						<p>Relational schema for users, products, carts, and orders. Parameterized queries only — no string-built SQL, no injection surface.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">03 — Sessions</span>
+						<h3>Custom session auth</h3>
+						<p>Session-based authentication with verified state on every request. Passwords hashed properly, cart state bound to the session.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">04 — Serving</span>
+						<h3>Nginx server blocks</h3>
+						<p>Fast static asset serving, gzip, cache headers, and clean reverse proxy rules — the store never waits on PHP for a CSS file.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">03</span>
+					<h2 data-reveal>The <em>stack</em></h2>
+				</div>
+				<div class="tags" data-reveal>
+					<span>PHP 8.2</span><span>MySQL</span><span>Vanilla JS</span><span>Nginx</span><span>MVC Architecture</span><span>PDO</span><span>HTML5 / CSS3</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">04</span>
+					<h2 data-reveal>Measured <em>outcomes</em></h2>
+				</div>
+				<div class="metrics" data-reveal>
+					<div class="metric"><div class="m-num">&lt;120ms</div><div class="m-txt">page render on a low-cost VPS</div></div>
+					<div class="metric"><div class="m-num">0</div><div class="m-txt">framework dependencies</div></div>
+					<div class="metric"><div class="m-num">1</div><div class="m-txt">request → response path, fully readable</div></div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="pj-foot">
+		<div class="wrap">
+			<h2 class="f-title" data-reveal>Built by hand,<br><em>run by light.</em></h2>
+			<div class="f-links" data-reveal>
+				<a class="btn btn-dark" href="/">← Back to portfolio</a>
+				<a class="btn btn-ghost" href="mailto:argaabiyyu4@gmail.com">Say hello</a>
+			</div>
+			<p class="f-meta" data-reveal>argabiyusyrf · <a href="https://github.com/argabiyusyrf" target="_blank" rel="noopener">github</a> · <a href="https://instagram.com/argabiyusyrf69" target="_blank" rel="noopener">instagram</a></p>
+		</div>
+	</footer>
+
+	<script src="/js/analytics.js" async></script>
+	<script src="/js/project.js"></script>
+</body>
+</html>

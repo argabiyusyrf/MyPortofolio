@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" data-theme="studio">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#ece7dc">
+	<meta name="description" content="No. Enumerator — a high-throughput Node.js CLI that expands partial Indonesian phone numbers and checks WhatsApp registration with rate-limiting, resume checkpoints, and CSV export.">
+	<meta property="og:title" content="No. Enumerator — CLI Automation">
+	<meta property="og:description" content="A resilient Node.js terminal tool for number expansion, WhatsApp registration checks, and CSV export.">
+	<title>No. Enumerator — CLI Automation Tool</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/project.css">
+</head>
+<body>
+
+	<header class="topbar">
+		<a class="topbar-back magnetic" href="/">
+			<span class="ico">←</span>
+			<span>arg<span style="color:var(--accent)">/</span></span>
+		</a>
+		<span class="topbar-tag">case study · 03</span>
+		<button class="theme-toggle" id="theme-toggle" aria-label="Switch theme">Studio</button>
+	</header>
+
+	<main>
+		<section class="pj-hero">
+			<div class="wrap">
+				<p class="pj-kicker" data-reveal><span class="dot"></span>CLI &amp; automation engineering</p>
+				<h1 class="pj-title" data-reveal>No.<em>Enumerator.</em></h1>
+				<p class="pj-sub" data-reveal>A high-throughput command line tool written in Node.js for partial phone number expansion and automated WhatsApp registration checking — with custom rate-limiting, resume checkpoints, and clean CSV output.</p>
+
+				<div class="pj-meta" data-reveal>
+					<div class="m-item"><span class="m-label">Year</span><span class="m-value">2022</span></div>
+					<div class="m-item"><span class="m-label">Role</span><span class="m-value">CLI / automation engineer</span></div>
+					<div class="m-item"><span class="m-label">Stack</span><span class="m-value">Node.js · whatsapp-web.js</span></div>
+				</div>
+
+				<div class="pj-cta" data-reveal>
+					<a class="btn btn-dark" href="mailto:argaabiyyu4@gmail.com"><span>Discuss a use case</span><span class="ico">↗</span></a>
+					<a class="btn btn-ghost" href="/"><span>Back to portfolio</span><span class="ico">→</span></a>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">01</span>
+					<h2 data-reveal>The <em>problem</em> &amp; the decision</h2>
+				</div>
+				<div class="pj-body">
+					<span class="sticky-label" data-reveal>Context</span>
+					<div data-reveal>
+						<p>Verifying whether a set of Indonesian phone numbers is registered on WhatsApp usually means slow, manual lookups — and doing it at scale invites getting rate-limited or banned. The tool needed to be <strong>fast, polite, and able to survive interruptions.</strong></p>
+						<p>So I built a queue-based CLI: it expands partial numbers, checks registration on your own session, respects rate limits, writes checkpoints, and resumes where it stopped. Nothing burns between runs.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">02</span>
+					<h2 data-reveal>Core <em>architecture</em></h2>
+				</div>
+				<div class="pillars">
+					<div class="pillar" data-reveal>
+						<span class="p-index">01 — Session</span>
+						<h3>Headless WhatsApp Web session</h3>
+						<p>Session management via whatsapp-web.js, authenticated once and reused — your own session, your own safety.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">02 — Queue</span>
+						<h3>Async queue with rate limiting</h3>
+						<p>Requests run through an asynchronous queue with configurable batch delay — throughput you control, not chaos.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">03 — Recovery</span>
+						<h3>State persistence &amp; resume</h3>
+						<p>Progress checkpoints written continuously. Interrupt the process, rerun it, and it picks up exactly where it stopped.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">04 — Output</span>
+						<h3>Clean terminal &amp; CSV export</h3>
+						<p>A tidy dashboard in the terminal plus formatted CSV telemetry — data you can hand to any spreadsheet.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">03</span>
+					<h2 data-reveal>The <em>stack</em></h2>
+				</div>
+				<div class="tags" data-reveal>
+					<span>Node.js</span><span>whatsapp-web.js</span><span>CLI Engine</span><span>Async Queue</span><span>Rate Limiting</span><span>CSV Exporter</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">04</span>
+					<h2 data-reveal>Measured <em>outcomes</em></h2>
+				</div>
+				<div class="metrics" data-reveal>
+					<div class="metric"><div class="m-num">1000s</div><div class="m-txt">requests handled safely per run</div></div>
+					<div class="metric"><div class="m-num">100%</div><div class="m-txt">resume-capable across interruptions</div></div>
+					<div class="metric"><div class="m-num">1</div><div class="m-txt">clean CSV per run, ready to analyze</div></div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="pj-foot">
+		<div class="wrap">
+			<h2 class="f-title" data-reveal>Automation that<br><em>respects the machine.</em></h2>
+			<div class="f-links" data-reveal>
+				<a class="btn btn-dark" href="/">← Back to portfolio</a>
+				<a class="btn btn-ghost" href="mailto:argaabiyyu4@gmail.com">Say hello</a>
+			</div>
+			<p class="f-meta" data-reveal>argabiyusyrf · <a href="https://github.com/argabiyusyrf" target="_blank" rel="noopener">github</a> · <a href="https://instagram.com/argabiyusyrf69" target="_blank" rel="noopener">instagram</a></p>
+		</div>
+	</footer>
+
+	<script src="/js/analytics.js" async></script>
+	<script src="/js/project.js"></script>
+</body>
+</html>

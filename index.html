@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en" data-theme="studio">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="theme-color" content="#ece7dc" />
+	<meta name="description"
+		content="argabiyusyrf — builds cinematic 3D scenes, e-commerce systems, and quiet tooling. A live experiment in digital gravity and light." />
+	<meta property="og:title" content="argabiyusyrf — Digital Gravity & Light" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="Cinematic 3D scenes, e-commerce systems, quiet tooling." />
+	<title>argabiyusyrf — Digital Gravity &amp; Light</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="js/analytics.js" async></script>
+</head>
+
+<body>
+	<div id="preloader" aria-hidden="true">
+		<div class="preloader-inner">
+			<div class="preloader-line"></div>
+			<p class="preloader-txt" data-i18n="preloader">initializing scene</p>
+		</div>
+	</div>
+
+	<div id="cursor" aria-hidden="true">
+		<div class="cursor-dot"></div>
+		<div class="cursor-ring"><span></span></div>
+	</div>
+
+	<div id="grain" aria-hidden="true"></div>
+	<div id="vignette" aria-hidden="true"></div>
+
+	<canvas id="scene-canvas" aria-hidden="true"></canvas>
+
+	<!-- Toast Container -->
+	<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+	<header class="nav" aria-label="Primary navigation">
+		<a class="nav-logo magnetic" href="#top" data-txt="arg/">
+			<span class="nav-logo-inner">arg<b>·</b></span>
+		</a>
+
+		<div class="nav-actions">
+			<button class="nav-control theme-toggle magnetic" id="theme-btn" aria-label="Switch theme" data-txt="theme">
+				<span class="nav-icon">✦</span>
+				<span class="theme-label">Studio</span>
+			</button>
+
+			<button class="nav-control lang-toggle magnetic" id="lang-btn" aria-label="Switch language" data-txt="lang">
+				<span class="lang-label">EN</span>
+			</button>
+
+			<button class="nav-control sound-toggle magnetic" id="sound-btn" aria-label="Toggle soundscape"
+				data-txt="audio">
+				<span class="sound-wave"> <i></i><i></i><i></i> </span>
+				<span class="sound-label" data-i18n="sound-muted">Muted</span>
+			</button>
+
+			<button class="nav-control cmdk-trigger magnetic" id="cmdk-btn" aria-label="Command palette"
+				data-txt="search">
+				<span class="cmdk-kbd">⌘K</span>
+			</button>
+
+			<a class="menu-toggle magnetic" href="#menu" aria-label="Open menu">
+				<span class="menu-toggle-line"></span>
+				<span class="menu-toggle-line"></span>
+			</a>
+		</div>
+	</header>
+
+	<nav id="menu" class="menu-overlay" aria-hidden="true">
+		<ul class="menu-links">
+			<li>
+				<a class="menu-link magnetic" href="#identity" data-index="01"><span class="menu-index">01</span><span
+						class="menu-link-txt" data-i18n="menu-identity">identity</span></a>
+			</li>
+			<li>
+				<a class="menu-link magnetic" href="#about" data-index="02"><span class="menu-index">02</span><span
+						class="menu-link-txt" data-i18n="menu-intent">the intent</span></a>
+			</li>
+			<li>
+				<a class="menu-link magnetic" href="#works" data-index="03"><span class="menu-index">03</span><span
+						class="menu-link-txt" data-i18n="menu-works">selected works</span></a>
+			</li>
+			<li>
+				<a class="menu-link magnetic" href="#experience" data-index="04"><span class="menu-index">04</span><span
+						class="menu-link-txt" data-i18n="menu-journey">the journey</span></a>
+			</li>
+			<li>
+				<a class="menu-link magnetic" href="#skills" data-index="05"><span class="menu-index">05</span><span
+						class="menu-link-txt" data-i18n="menu-toolkit">the toolkit</span></a>
+			</li>
+			<li>
+				<a class="menu-link magnetic" href="#contact" data-index="06"><span class="menu-index">06</span><span
+						class="menu-link-txt" data-i18n="menu-touch">in touch</span></a>
+			</li>
+		</ul>
+		<div class="menu-footer">
+			<p class="menu-note" data-i18n="menu-note">
+				indonesia · building on the open web
+			</p>
+			<div class="menu-theme-options">
+				<span data-i18n="menu-theme-label">Theme:</span>
+				<button class="theme-opt active" data-set-theme="studio">
+					Studio
+				</button>
+				<button class="theme-opt" data-set-theme="obsidian">Obsidian</button>
+				<button class="theme-opt" data-set-theme="solaris">Solaris</button>
+			</div>
+		</div>
+	</nav>
+
+	<main class="wrap">
+		<section id="top" class="hero">
+			<p class="hero-eyebrow" data-reveal>
+				<span class="eyebrow-pill"></span>
+				<span data-i18n="hero-eyebrow">independent builder · cg &amp; code</span>
+			</p>
+
+			<h1 class="hero-title" aria-label="argabiyusyrf">
+				<span class="hero-line" aria-hidden="true">
+					<span class="hl-word">arg<span class="f italic">abiyu</span>syrf</span>
+				</span>
+				<span class="hero-line" aria-hidden="true">
+					<span class="hl-word" data-i18n-html="hero-line2">and the <span class="f italic thin">physics</span>
+						of sight</span>
+				</span>
+			</h1>
+
+			<p class="hero-sub" data-reveal data-i18n-html="hero-sub">
+				I build <em>cinematic 3D scenes</em>, e-commerce systems, and quiet
+				tooling — where every pixel holds weight and every frame carries
+				light.
+			</p>
+
+			<div class="hero-actions">
+				<a class="btn btn-dark magnetic" href="#works">
+					<span class="btn-txt" data-i18n="btn-work">enter the work</span>
+					<span class="btn-ico">↓</span>
+				</a>
+				<button class="btn btn-ghost magnetic" id="hero-inspect-btn">
+					<span class="btn-txt" data-i18n="btn-focus">3D Artifact Focus</span>
+					<span class="btn-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+							stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+							aria-hidden="true">
+							<circle cx="12" cy="12" r="1.6" />
+							<ellipse cx="12" cy="12" rx="10" ry="4.2" />
+							<ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)" />
+							<ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)" />
+						</svg></span>
+				</button>
+				<a class="btn btn-ghost magnetic" href="#contact">
+					<span class="btn-txt" data-i18n="btn-hello">say hello</span>
+					<span class="btn-ico">↗</span>
+				</a>
+			</div>
+
+			<div class="hero-meta">
+				<p>
+					<span data-i18n="lat">lat</span> <span data-meta="0">-0.7667</span>°
+				</p>
+				<p>
+					<span data-i18n="lng">lng</span>
+					<span data-meta="1">100.6583</span>°
+				</p>
+				<p>
+					<span data-i18n="alt">alt</span> <span data-meta="2">+8 m</span>
+				</p>
+				<p>
+					<span data-i18n="time">time</span>
+					<span id="jakarta-time">12:00:00 WIB</span>
+				</p>
+				<p class="hero-help" data-i18n-html="hero-help">
+					press <kbd>h</kbd> to help
+				</p>
+				<div class="hero-scrollcue">
+					<span data-i18n="scroll">scroll</span><i></i>
+				</div>
+			</div>
+		</section>
+
+		<div class="marquee" aria-hidden="true">
+			<div class="marquee-track">
+				<span>clay</span><i>✦</i><span>light</span><i>✦</i><span>motion</span><i>✦</i><span>gravity</span><i>✦</i><span>pixels</span><i>✦</i><span>systems</span><i>✦</i><span>quiet</span><i>✦</i>
+				<span>clay</span><i>✦</i><span>light</span><i>✦</i><span>motion</span><i>✦</i><span>gravity</span><i>✦</i><span>pixels</span><i>✦</i><span>systems</span><i>✦</i><span>quiet</span><i>✦</i>
+			</div>
+		</div>
+
+		<section id="identity" class="identity">
+			<div class="chapter" aria-hidden="true">
+				<i></i><span>act I</span><i class="chapter-line"></i><span
+					data-i18n="id-chapter">identity</span><b>01</b><i></i>
+			</div>
+
+			<div class="identity-hero">
+				<div class="identity-left">
+					<p class="section-kicker" data-reveal data-i18n="id-kicker">
+						Identity
+					</p>
+					<h2 class="identity-title">
+						<span class="i-line"><span class="i-word">Arga</span></span>
+						<span class="i-line"><span class="i-word f italic">Abiyyu Syarif</span></span>
+					</h2>
+					<p class="identity-tagline" data-reveal data-i18n="id-tagline">
+						3D creative developer · cg &amp; code — Sumatera Barat, Indonesia
+					</p>
+					<p class="identity-bio" data-reveal data-i18n-html="id-bio">
+						Born between a render farm and a cash register. SMK RPL gave me
+						the foundation; the field gave me the instinct — running a busy
+						kitchen's point-of-sale taught me what tired, fast, real users
+						actually need. I shape
+						<em>three.js</em> like clay, <em>GSAP</em> like breath, and the
+						backend until it disappears. Every system ships simple, fast, and
+						quietly heavy.
+					</p>
+					<div class="identity-status" data-reveal>
+						<span class="eyebrow-pill"></span>
+						<span data-i18n="id-status">available for select projects</span>
+					</div>
+					<div class="identity-links" data-reveal>
+						<a class="identity-link magnetic" href="https://github.com/argabiyusyrf" target="_blank"
+							rel="noopener" data-txt="gh">
+							<span>GitHub</span><span class="btn-ico">↗</span>
+						</a>
+						<a class="identity-link magnetic" href="mailto:argaabiyyu4@gmail.com" data-txt="mail">
+							<span>Email</span><span class="btn-ico">↗</span>
+						</a>
+						<a class="identity-link magnetic" href="https://instagram.com/argabiyusyrf69" target="_blank"
+							rel="noopener" data-txt="ig">
+							<span>Instagram</span><span class="btn-ico">↗</span>
+						</a>
+					</div>
+				</div>
+
+				<div class="identity-right">
+					<div class="mono-parallax">
+						<div class="mono-stage">
+							<div class="mono-glow"></div>
+							<div class="mono-orbit"></div>
+							<div class="mono-ring r1"></div>
+							<div class="mono-ring r2"></div>
+							<div class="mono-core">
+								<span class="mono-core-inner"><img class="mono-ava" src="my-ava.png"
+										alt="Arga Abiyyu Syarif" loading="lazy" /></span>
+							</div>
+						</div>
+					</div>
+					<p class="mono-caption" data-i18n="id-caption">
+						webgl · clay · light
+					</p>
+				</div>
+			</div>
+
+			<div class="identity-facts">
+				<div class="fact">
+					<span data-i18n="id-fact-based">based</span><b>Sumatera Barat, ID</b>
+				</div>
+				<div class="fact">
+					<span data-i18n="id-fact-status">status</span><b data-i18n="id-fact-work">open to work</b>
+				</div>
+				<div class="fact">
+					<span data-i18n="id-fact-focus">focus</span><b>3D · fullstack</b>
+				</div>
+				<div class="fact">
+					<span data-i18n="id-fact-since">since</span><b>2022</b>
+				</div>
+			</div>
+
+			<div class="cv-section">
+				<div class="cv-head">
+					<div>
+						<p class="section-kicker" data-reveal data-i18n="cv-kicker">
+							Curriculum vitae
+						</p>
+						<h2 class="cv-title" data-reveal data-i18n-html="cv-title">
+							The quiet <span class="f italic">resume.</span>
+						</h2>
+					</div>
+				<div class="cv-actions" data-reveal>
+					<a class="btn btn-ghost magnetic" href="cv.html">
+						<span class="btn-txt" data-i18n="cv-view">View CV</span>
+						<span class="btn-ico">↗</span>
+					</a>
+					<button class="btn btn-ghost magnetic" id="download-cv" type="button" aria-label="Download CV">
+						<span class="btn-txt" data-i18n="cv-download">Download CV</span>
+						<span class="btn-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg></span>
+					</button>
+				</div>
+				</div>
+
+				<div class="cv-grid">
+					<div class="cv-card" data-reveal>
+						<h4 data-i18n="cv-card1-h">Personal data</h4>
+						<dl class="cv-list">
+							<div>
+								<dt data-i18n="cv-fullname">full name</dt>
+								<dd>Arga Abiyyu Syarif</dd>
+							</div>
+							<div>
+								<dt data-i18n="cv-birthplace">birthplace</dt>
+								<dd>Solok, Indonesia · 16.05.2006</dd>
+							</div>
+							<div>
+								<dt data-i18n="cv-domicile">domicile</dt>
+								<dd>Sumatera Barat · UTC+7</dd>
+							</div>
+							<div>
+								<dt data-i18n="cv-email">email</dt>
+								<dd>argaabiyyu4@gmail.com</dd>
+							</div>
+							<div>
+								<dt data-i18n="cv-languages">languages</dt>
+								<dd data-i18n="cv-lang-val">
+									Indonesian (native) · English (working)
+								</dd>
+							</div>
+						</dl>
+					</div>
+
+					<div class="cv-card" data-reveal>
+						<h4 data-i18n="cv-card2-h">Education &amp; learning</h4>
+						<ul class="cv-edu">
+							<li>
+								<span class="cv-year" data-i18n="cv-edu1-year">2021 — 2024</span>
+								<b data-i18n="cv-edu1-t">SMK Negeri 1 Singkarak · RPL</b>
+								<p data-i18n-html="cv-edu1-d">
+									Rekayasa Perangkat Lunak — software foundations: logic,
+									databases, and coding; where my engineering instinct began.
+								</p>
+							</li>
+							<li>
+								<span class="cv-year">2022 — present</span>
+								<b data-i18n="cv-edu2-t">Self-taught engineering path</b>
+								<p data-i18n-html="cv-edu2-d">
+									WebGL, computer graphics, system architecture — learned by
+									shipping real systems, not courses.
+								</p>
+							</li>
+							<li>
+								<span class="cv-year">2023</span>
+								<b data-i18n="cv-edu3-t">Field systems &amp; operations</b>
+								<p data-i18n-html="cv-edu3-d">
+									Cashier flows, shift stock tracking, and sales recaps —
+									learned firsthand in a real, busy kitchen.
+								</p>
+							</li>
+						</ul>
+					</div>
+
+					<div class="cv-card" data-reveal>
+						<h4 data-i18n="cv-card3-h">Core strengths</h4>
+						<ul class="cv-strengths">
+							<li data-i18n="cv-str1">
+								E-commerce &amp; point-of-sale system design
+							</li>
+							<li data-i18n="cv-str2">
+								Cinematic WebGL &amp; material composition
+							</li>
+							<li data-i18n="cv-str3">
+								Relational business data, normalized to 3NF
+							</li>
+							<li data-i18n="cv-str4">
+								Tailwind UI &amp; motion choreography with GSAP
+							</li>
+						</ul>
+					</div>
+
+					<div class="cv-card" data-reveal>
+						<h4 data-i18n="cv-card4-h">Currently exploring</h4>
+						<p class="cv-now" data-i18n-html="cv-now">
+							Real-time ray marching, spatial audio, and keeping a heavy scene
+							fast on cheap iron — the craft of invisible performance.
+						</p>
+						<div class="cv-status">
+							<span class="eyebrow-pill"></span>
+							<span data-i18n="id-status">available for select projects</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="about" class="about">
+			<div class="chapter" aria-hidden="true">
+				<i></i><span>act II</span><i class="chapter-line"></i><span data-i18n="ab-chapter">the
+					intent</span><b>02</b><i></i>
+			</div>
+
+			<p class="section-kicker" data-reveal data-i18n="ab-kicker">
+				The intent
+			</p>
+			<h2 class="scrub-title" data-scrub data-em="blind" data-i18n-html="ab-title">
+				Light is a material. So is code. I treat both like clay —
+			</h2>
+			<div class="about-body">
+				<p class="scrub-paragraph" data-scrub-words id="about-copy" data-i18n-html="ab-copy">
+					Building started small: a store, a food pipeline, a terminal tool.
+					Every one taught the same lesson — interfaces are scenes, and scenes
+					are stories told with motion. Three.js gives geometry a soul, GSAP
+					gives time a rhythm, and PHP keeps the whole thing running while
+					nobody watches. The result is work that feels lived-in: warm,
+					weighty, impossible to ignore. Pragmatic by default, allergic to
+					sloppy details, and a fast self-directed learner — I bridge real
+					business needs into working code, not theory.
+				</p>
+				<div class="about-stats" data-reveal>
+					<div class="stat">
+						<b id="stat-projects">03</b><span data-i18n="stat-shipped">systems shipped</span>
+					</div>
+					<div class="stat">
+						<b id="stat-stack">06</b><span data-i18n="stat-stack">stacks in rotation</span>
+					</div>
+					<div class="stat">
+						<b id="stat-hours">∞</b><span data-i18n="stat-ticks">ticks of a clock</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="works" class="works">
+			<div class="chapter chapter-tall" aria-hidden="true">
+				<i></i><span>act III</span><i class="chapter-line"></i><span data-i18n="wk-chapter">selected
+					works</span><b>03</b><i></i>
+			</div>
+			<div class="works-head">
+				<p class="section-kicker" data-reveal data-i18n="wk-kicker">
+					Selected works
+				</p>
+				<h2 data-reveal data-i18n-html="wk-title">
+					Small worlds,<br />each with its own
+					<span class="f italic">gravity.</span>
+				</h2>
+			</div>
+
+			<div class="works-scroll">
+				<div class="works-track">
+					<article class="work-card" data-project="arazel">
+						<div class="work-media">
+							<div class="work-sculpt s-arazel" data-depth="28">
+								<div class="sc-brick"></div>
+								<div class="sc-ring"></div>
+								<div class="sc-dot"></div>
+							</div>
+							<span class="work-count">01</span>
+							<div class="work-media-actions">
+								<button class="btn-case-study magnetic" data-open-project="arazel">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://arazelstore.site.je" target="_blank" rel="noopener">
+									<span data-i18n="visit-live">visit live</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+							<button class="work-inspect-btn magnetic" aria-label="Inspect 3D Artifact"
+								data-i18n="inspect">
+								3D Inspect
+							</button>
+						</div>
+						<div class="work-info">
+							<h3>Arazel&nbsp;Store</h3>
+							<p data-i18n-html="arazel-d">
+								Full e-commerce — auth, cart, checkout, and a lean admin
+								panel. No heavyweight framework: a hand-rolled PHP core that
+								stays fast on cheap iron.
+							</p>
+							<div class="work-tags">
+								<span>PHP</span><span>MySQL</span><span>MVC</span><span>Nginx</span>
+							</div>
+							<div class="work-actions">
+								<button class="btn-case-study magnetic" data-open-project="arazel">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://arazelstore.site.je" target="_blank" rel="noopener">
+									<span data-i18n="visit-live">visit live</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+						</div>
+					</article>
+
+					<article class="work-card" data-project="foodcraft">
+						<div class="work-media">
+							<div class="work-sculpt s-foodcraft" data-depth="34">
+								<div class="sc-cup"></div>
+								<div class="sc-plume"></div>
+								<div class="sc-ring s2"></div>
+							</div>
+							<span class="work-count">02</span>
+							<div class="work-media-actions">
+								<button class="btn-case-study magnetic" data-open-project="foodcraft">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://foodycraft.site.je" target="_blank" rel="noopener">
+									<span data-i18n="visit-live">visit live</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+							<button class="work-inspect-btn magnetic" aria-label="Inspect 3D Artifact"
+								data-i18n="inspect">
+								3D Inspect
+							</button>
+						</div>
+						<div class="work-info">
+							<h3>Foodcraft</h3>
+							<p data-i18n-html="foodcraft-d">
+								An ordering pipeline where meals flow from menu to doorstep.
+								Templates, controllers, and storage wired into a single clean
+								router.
+							</p>
+							<div class="work-tags">
+								<span>PHP</span><span>SQL</span><span>Routing</span>
+							</div>
+							<div class="work-actions">
+								<button class="btn-case-study magnetic" data-open-project="foodcraft">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://foodycraft.site.je" target="_blank" rel="noopener">
+									<span data-i18n="visit-live">visit live</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+						</div>
+					</article>
+
+					<article class="work-card" data-project="enumerator">
+						<div class="work-media">
+							<div class="work-sculpt s-wa" data-depth="26">
+								<div class="sc-bars">
+									<i></i><i></i><i></i><i></i><i></i><i></i>
+								</div>
+								<div class="sc-grid"></div>
+							</div>
+							<span class="work-count">03</span>
+							<div class="work-media-actions">
+								<button class="btn-case-study magnetic" data-open-project="enumerator">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/whatsapp-enumerator" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+							<button class="work-inspect-btn magnetic" aria-label="Inspect 3D Artifact"
+								data-i18n="inspect">
+								3D Inspect
+							</button>
+						</div>
+						<div class="work-info">
+							<h3>No. Enumerator</h3>
+							<p data-i18n-html="enumerator-d">
+								A CLI that expands partial Indonesian numbers, then checks
+								WhatsApp registration on your own session — with resume,
+								rate-limit, and CSV output.
+							</p>
+							<div class="work-tags">
+								<span>Node</span><span>whatsapp-web</span><span>CLI</span>
+							</div>
+							<div class="work-actions">
+								<button class="btn-case-study magnetic" data-open-project="enumerator">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/whatsapp-enumerator" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+						</div>
+					</article>
+
+					<article class="work-card" data-project="bookshelf">
+						<div class="work-media">
+							<div class="work-sculpt s-books" data-depth="30">
+								<div class="sc-shelf">
+									<i class="sc-book b1"></i><i class="sc-book b2"></i>
+									<i class="sc-book b3"></i><i class="sc-book b4"></i>
+									<i class="sc-book b5"></i>
+								</div>
+							</div>
+							<span class="work-count">04</span>
+							<div class="work-media-actions">
+								<button class="btn-case-study magnetic" data-open-project="bookshelf">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/Bookshelf-APP" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+								<a class="work-link" href="https://24781065-argaabiyyu-bookshelfapp.netlify.app/" target="_blank" rel="noopener">
+									<span data-i18n="visit-live">visit live</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+							<button class="work-inspect-btn magnetic" aria-label="Inspect 3D Artifact"
+								data-i18n="inspect">
+								3D Inspect
+							</button>
+						</div>
+						<div class="work-info">
+							<h3>Bookshelf&nbsp;App</h3>
+							<p data-i18n-html="bookshelf-d">
+								A responsive book manager — add, edit, search, filter, and
+								sort titles into "to read" and "finished" shelves, all
+								persisting in your browser.
+							</p>
+							<div class="work-tags">
+								<span>JavaScript</span><span>Web Storage</span><span>Bootstrap</span>
+							</div>
+							<div class="work-actions">
+								<button class="btn-case-study magnetic" data-open-project="bookshelf">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/Bookshelf-APP" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+								<a class="work-link" href="https://24781065-argaabiyyu-bookshelfapp.netlify.app/" target="_blank" rel="noopener">
+									<span data-i18n="visit-live">visit live</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+						</div>
+					</article>
+
+					<article class="work-card" data-project="csirt">
+						<div class="work-media">
+							<div class="work-sculpt s-csirt" data-depth="22">
+								<div class="sc-shield"></div>
+								<div class="sc-pulse"></div>
+							</div>
+							<span class="work-count">05</span>
+							<div class="work-media-actions">
+								<button class="btn-case-study magnetic" data-open-project="csirt">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/Csirt-Kominfo" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+							<button class="work-inspect-btn magnetic" aria-label="Inspect 3D Artifact"
+								data-i18n="inspect">
+								3D Inspect
+							</button>
+						</div>
+						<div class="work-info">
+							<h3>CSIRT&nbsp;Kominfo</h3>
+							<p data-i18n-html="csirt-d">
+								A public-facing site for a Computer Security Incident
+								Response Team — incident awareness, threat assessment, and
+								mitigation planning.
+							</p>
+							<div class="work-tags">
+								<span>HTML</span><span>CSS</span><span>Cyber&nbsp;Security</span>
+							</div>
+							<div class="work-actions">
+								<button class="btn-case-study magnetic" data-open-project="csirt">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/Csirt-Kominfo" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+						</div>
+					</article>
+
+					<article class="work-card" data-project="calculator">
+						<div class="work-media">
+							<div class="work-sculpt s-calc" data-depth="24">
+								<div class="sc-calc-pad">
+									<i class="ck-display">0</i>
+									<i class="ck-row"><b>7</b><b>8</b><b>9</b></i>
+									<i class="ck-row"><b>4</b><b>5</b><b>6</b></i>
+									<i class="ck-row"><b>1</b><b>2</b><b>3</b></i>
+								</div>
+							</div>
+							<span class="work-count">06</span>
+							<div class="work-media-actions">
+								<button class="btn-case-study magnetic" data-open-project="calculator">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/Calculator-App/" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+							<button class="work-inspect-btn magnetic" aria-label="Inspect 3D Artifact"
+								data-i18n="inspect">
+								3D Inspect
+							</button>
+						</div>
+						<div class="work-info">
+							<h3>Calculator&nbsp;App</h3>
+							<p data-i18n-html="calculator-d">
+								A native Android calculator built for the 2024 UKK exam —
+								clean arithmetic UI with expression evaluation, tested under
+								exam pressure.
+							</p>
+							<div class="work-tags">
+								<span>Java</span><span>Android</span><span>Native&nbsp;UI</span>
+							</div>
+							<div class="work-actions">
+								<button class="btn-case-study magnetic" data-open-project="calculator">
+									<span data-i18n="case-study">Case Study</span><i>→</i>
+								</button>
+								<a class="work-link" href="https://github.com/argabiyusyrf/Calculator-App/" target="_blank" rel="noopener">
+									<span data-i18n="see-repo">see repository</span><span class="btn-ico">↗</span>
+								</a>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+
+			<p class="works-hint" data-reveal>
+				<span class="eyebrow-pill"></span><span data-i18n="wk-hint">drag — the scene follows the scroll</span>
+			</p>
+		</section>
+
+		<!-- Act IV — The Journey / Experience -->
+		<section id="experience" class="experience">
+			<div class="chapter chapter-tall" aria-hidden="true">
+				<i></i><span>act IV</span><i class="chapter-line"></i><span data-i18n="exp-chapter">the
+					journey</span><b>04</b><i></i>
+			</div>
+			<div class="exp-head">
+				<p class="section-kicker" data-reveal data-i18n="exp-kicker">
+					The journey
+				</p>
+				<h2 data-reveal data-i18n-html="exp-title">
+					Milestones &amp; <span class="f italic">system builds.</span>
+				</h2>
+			</div>
+
+			<div class="timeline">
+				<div class="timeline-line"><i></i></div>
+				<div class="timeline-item" data-reveal>
+					<div class="timeline-meta">
+						<span class="timeline-num">01</span>
+						<span class="timeline-date">2024 — Present</span>
+						<span class="timeline-badge" data-i18n="t1-badge">3D &amp; WebGL Systems</span>
+					</div>
+					<div class="timeline-content">
+						<h3 data-i18n="t1-title">
+							Cinematic Web &amp; Shader Architectures
+						</h3>
+						<p data-i18n-html="t1-desc">
+							Developing custom Three.js WebGL scenes, shader-based
+							post-processing effects, and GSAP ScrollTrigger pipelines for
+							immersive Web experiences with strict zero-dependency
+							philosophy.
+						</p>
+						<ul class="timeline-highlights">
+							<li data-i18n="t1-li1">
+								Built real-time procedural lighting &amp; clay-shading sculpts
+								in vanilla Three.js.
+							</li>
+							<li data-i18n="t1-li2">
+								Engineered physics-based 3D scroll synchronization with
+								sub-pixel camera poses.
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-reveal>
+					<div class="timeline-meta">
+						<span class="timeline-num">02</span>
+						<span class="timeline-date">2023 — 2024</span>
+						<span class="timeline-badge" data-i18n="t2-badge">Fullstack Systems</span>
+					</div>
+					<div class="timeline-content">
+						<h3 data-i18n="t2-title">E-Commerce, POS &amp; Routing Cores</h3>
+						<p data-i18n-html="t2-desc">
+							Hand-crafted modular PHP backends — full e-commerce and
+							point-of-sale flows without framework overhead. Relational SQL
+							schemas, cart state engines, and Nginx rules tuned for ultra-low
+							latency.
+						</p>
+						<ul class="timeline-highlights">
+							<li data-i18n="t2-li1">
+								Implemented custom auth, cart state engines, checkout, and
+								admin dashboards.
+							</li>
+							<li data-i18n="t2-li2">
+								Designed normalized business data (3NF) and sub-120ms renders
+								on low-cost VPS.
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-reveal>
+					<div class="timeline-meta">
+						<span class="timeline-num">03</span>
+						<span class="timeline-date">2025 — 2026</span>
+						<span class="timeline-badge" data-i18n="t3-badge">Field Systems &amp; CLI</span>
+					</div>
+					<div class="timeline-content">
+						<h3 data-i18n="t3-title">Point-of-Sale Ops &amp; Automation</h3>
+						<p data-i18n-html="t3-desc">
+							Frontline operations at Ayam Geprek Mas Boy — daily cashier
+							flows, shift-based stock tracking, and sales recaps — paired
+							with my own Node.js CLI tools for repetitive data work.
+						</p>
+						<ul class="timeline-highlights">
+							<li data-i18n="t3-li1">
+								Ran point-of-sale operations and shift handover stock counts.
+							</li>
+							<li data-i18n="t3-li2">
+								Built Node.js automation — batch processing, rate limits, CSV
+								export.
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="timeline-item" data-reveal>
+					<div class="timeline-meta">
+						<span class="timeline-num">04</span>
+						<span class="timeline-date">2021 — 2024</span>
+						<span class="timeline-badge" data-i18n="t4-badge">SMK RPL · Gov IT</span>
+					</div>
+					<div class="timeline-content">
+						<h3 data-i18n="t4-title">Foundations &amp; Government IT</h3>
+						<p data-i18n-html="t4-desc">
+							Rekayasa Perangkat Lunak at SMK Negeri 1 Singkarak, plus time
+							inside Dinas Kominfo Sumbar — where I learned how public
+							institutions structure software, data, and documentation.
+						</p>
+						<ul class="timeline-highlights">
+							<li data-i18n="t4-li1">
+								Built software foundations — logic, databases, coding — at SMK
+								RPL.
+							</li>
+							<li data-i18n="t4-li2">
+								Supported real government IT workflows at Diskominfo Sumbar.
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Act V — The Toolkit (Skills) -->
+		<section id="skills" class="skills">
+			<div class="chapter chapter-tall" aria-hidden="true">
+				<i></i><span>act V</span><i class="chapter-line"></i><span data-i18n="sk-chapter">the
+					toolkit</span><b>05</b><i></i>
+			</div>
+			<div class="skills-left">
+				<p class="section-kicker" data-reveal data-i18n="sk-kicker">
+					The toolkit
+				</p>
+				<h2 data-reveal data-i18n-html="sk-title">
+					Grains of<br />the <span class="f italic">stack.</span>
+				</h2>
+			</div>
+			<div class="skills-grid">
+				<div class="skill" data-category="cg" data-reveal>
+					<span>01</span>
+					<h3 data-i18n-html="s1-h">Three.js <b>&amp; WebGL</b></h3>
+					<p data-i18n-html="s1-d">
+						Geometry, materials, light paths, custom procedural shaders, 3D
+						game logic (Unity), and performance budget tuning.
+					</p>
+					<div class="skill-bar"><i style="width: 90%"></i></div>
+				</div>
+				<div class="skill" data-category="cg" data-reveal>
+					<span>02</span>
+					<h3 data-i18n-html="s2-h">GSAP <b>&amp; ScrollTrigger</b></h3>
+					<p data-i18n-html="s2-d">
+						Scroll, pin, scrub — time as a tool, multi-phase keyframes, and
+						magnetic UI interactions.
+					</p>
+					<div class="skill-bar"><i style="width: 92%"></i></div>
+				</div>
+				<div class="skill" data-category="backend" data-reveal>
+					<span>03</span>
+					<h3 data-i18n-html="s3-h">PHP <b>(Vanilla MVC)</b></h3>
+					<p data-i18n-html="s3-d">
+						Hand-rolled cores, clean router engines, zero-dependency session
+						management and security.
+					</p>
+					<div class="skill-bar"><i style="width: 88%"></i></div>
+				</div>
+				<div class="skill" data-category="backend" data-reveal>
+					<span>04</span>
+					<h3 data-i18n-html="s4-h">MySQL <b>/ Relational SQL</b></h3>
+					<p data-i18n-html="s4-d">
+						Normalized relational schemas, indexed queries, transactions, and
+						performant data storage.
+					</p>
+					<div class="skill-bar"><i style="width: 85%"></i></div>
+				</div>
+				<div class="skill" data-category="devops" data-reveal>
+					<span>05</span>
+					<h3 data-i18n-html="s5-h">Node.js <b>&amp; Tooling</b></h3>
+					<p data-i18n-html="s5-d">
+						CLI tools, data pipelines, web socket integrations, and headless
+						automation streams.
+					</p>
+					<div class="skill-bar"><i style="width: 86%"></i></div>
+				</div>
+				<div class="skill" data-category="devops" data-reveal>
+					<span>06</span>
+					<h3 data-i18n-html="s6-h">Nginx <b>&amp; Server Ops</b></h3>
+					<p data-i18n-html="s6-d">
+						Server configuration, reverse proxy setup, quiet deployments, SSL,
+						and HTTP/2 tuning on Linux/Ubuntu.
+					</p>
+					<div class="skill-bar"><i style="width: 80%"></i></div>
+				</div>
+				<div class="skill" data-category="cg" data-reveal>
+					<span>07</span>
+					<h3 data-i18n-html="s7-h">Tailwind <b>&amp; UI Engineering</b></h3>
+					<p data-i18n-html="s7-d">
+						Responsive, modular interfaces — minimalist-chic and liquid-glass
+						systems translated into precise frontend code.
+					</p>
+					<div class="skill-bar"><i style="width: 84%"></i></div>
+				</div>
+				<div class="skill" data-category="backend" data-reveal>
+					<span>08</span>
+					<h3 data-i18n-html="s8-h">POS <b>&amp; Inventory Logic</b></h3>
+					<p data-i18n-html="s8-d">
+						Point-of-sale flows, shift-based stock tracking, daily sales
+						recaps, and business data normalized to 3NF.
+					</p>
+					<div class="skill-bar"><i style="width: 90%"></i></div>
+				</div>
+			</div>
+
+			<div class="skills-filter" data-reveal>
+				<span class="filter-label" data-i18n="filter-label">filter</span>
+				<button class="filter-btn active" data-filter="all" data-i18n="filter-all">
+					All
+				</button>
+				<button class="filter-btn" data-filter="cg" data-i18n="filter-cg">
+					3D &amp; Frontend
+				</button>
+				<button class="filter-btn" data-filter="backend" data-i18n="filter-be">
+					Backend &amp; DB
+				</button>
+				<button class="filter-btn" data-filter="devops" data-i18n="filter-ops">
+					DevOps &amp; CLI
+				</button>
+			</div>
+		</section>
+
+		<!-- Act VI — Contact -->
+		<footer id="contact" class="footer">
+			<div class="footer-inner">
+				<div class="chapter" aria-hidden="true">
+					<i></i><span>act VI</span><i class="chapter-line"></i><span data-i18n="ft-chapter">in
+						touch</span><b>06</b><i></i>
+				</div>
+				<p class="section-kicker" data-reveal data-i18n="ft-kicker">
+					In touch
+				</p>
+				<h2 class="footer-title" data-reveal data-i18n-html="ft-title">
+					Have a world<br />to <span class="f italic">weigh</span> out?
+				</h2>
+
+				<div class="footer-contact-wrap" data-reveal>
+					<div class="footer-mail-box">
+						<a class="mail-link magnetic" href="mailto:argaabiyyu4@gmail.com"
+							id="email-link">argaabiyyu4@gmail.com</a>
+						<button class="btn-copy-email magnetic" id="copy-email-btn" aria-label="Copy email address">
+							<span data-i18n="copy-addr">Copy Address</span>
+							<span class="btn-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+									stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+									stroke-linejoin="round" aria-hidden="true">
+									<rect x="9" y="9" width="11" height="11" rx="2" />
+									<path d="M5 15V5a2 2 0 0 1 2-2h10" />
+								</svg></span>
+						</button>
+					</div>
+
+					<!-- Interactive Quick Message Form -->
+					<form class="quick-contact-form" id="contact-form" novalidate method="POST"
+						action="https://formspree.io/f/maewbpye">
+						<p class="form-title" data-i18n="form-title">Send a quiet note</p>
+						<input type="hidden" name="_subject" value="Portfolio · quiet note" />
+						<input type="hidden" name="_to" value="argaabiyyu4@gmail.com" />
+						<div class="form-grid">
+							<div class="form-group">
+								<input type="text" id="form-name" name="name" autocomplete="name" required
+									data-i18n-ph="ph-name" placeholder="Your name" aria-describedby="err-form-name"
+									aria-invalid="false" />
+								<p class="form-error" id="err-form-name" aria-live="polite"></p>
+							</div>
+							<div class="form-group">
+								<input type="email" id="form-email" name="email" autocomplete="email" required
+									data-i18n-ph="ph-email" placeholder="Your email" aria-describedby="err-form-email"
+									aria-invalid="false" />
+								<p class="form-error" id="err-form-email" aria-live="polite"></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<textarea id="form-msg" name="message" rows="3" required data-i18n-ph="ph-msg"
+								placeholder="Brief detail or idea..." aria-describedby="err-form-msg"
+								aria-invalid="false"></textarea>
+							<p class="form-error" id="err-form-msg" aria-live="polite"></p>
+						</div>
+						<button type="submit" class="btn btn-dark magnetic" id="form-submit">
+							<span class="btn-txt" data-i18n="btn-transmit">Transmit Note</span>
+							<span class="btn-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+									stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+									stroke-linejoin="round" aria-hidden="true">
+									<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" />
+								</svg></span>
+						</button>
+					</form>
+				</div>
+
+				<div class="footer-meta" data-reveal>
+					<p data-i18n="ft-meta">est. 2022 — the open web</p>
+					<div class="footer-social">
+						<a class="magnetic" href="https://github.com/argabiyusyrf" target="_blank" rel="noopener"
+							data-txt="gh">GitHub</a>
+						<span>×</span>
+						<a class="magnetic" href="https://instagram.com/argabiyusyrf69" target="_blank" rel="noopener"
+							data-txt="ig">Instagram</a>
+						<span>×</span>
+						<a class="magnetic" href="https://web.facebook.com/argabiyusyrf69" target="_blank"
+							rel="noopener" data-txt="fb">Facebook</a>
+						<span>×</span>
+						<a class="magnetic" href="https://www.threads.net/@argabiyusyrf69" target="_blank"
+							rel="noopener" data-txt="th">Threads</a>
+						<span>×</span>
+						<a class="magnetic" href="https://www.tiktok.com/@argabiyusyrf69" target="_blank" rel="noopener"
+							data-txt="tt">TikTok</a>
+						<span>×</span>
+						<a class="magnetic" href="https://x.com/argabiyusyrf69" target="_blank" rel="noopener"
+							data-txt="x">X</a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-legal" data-reveal>
+				<p data-i18n-html="ft-copy">
+					© <span id="copy-year">2026</span> argabiyusyrf — all rights
+					reserved
+				</p>
+				<p class="footer-foot" data-reveal data-i18n="ft-foot">
+					built to fade only at the edge of the light.
+				</p>
+			</div>
+		</footer>
+	</main>
+
+	<!-- Project Case Study Modal -->
+	<div id="project-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+		<div class="modal-card">
+			<button class="modal-close magnetic" aria-label="Close modal">✕</button>
+			<div class="modal-header">
+				<span class="modal-tag" data-i18n="modal-tag">Case Study</span>
+				<h2 class="modal-title" id="modal-project-title">Project Title</h2>
+			</div>
+			<div class="modal-body">
+				<div class="modal-summary" id="modal-project-summary"></div>
+				<div class="modal-details">
+					<h4 data-i18n="modal-arch">Core Architecture</h4>
+					<ul id="modal-project-arch"></ul>
+					<h4 data-i18n="modal-stack">Tech Stack &amp; Dependencies</h4>
+					<div class="modal-tags" id="modal-project-tags"></div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-dark magnetic" id="modal-repo-link" href="#" target="_blank" rel="noopener">
+					<span class="btn-txt" data-i18n="modal-repo">See Repository</span>
+					<span class="btn-ico">↗</span>
+				</a>
+				<a class="btn btn-dark magnetic" id="modal-live-link" href="#" target="_blank" rel="noopener">
+					<span class="btn-txt" data-i18n="modal-open">Open System / Live Demo</span>
+					<span class="btn-ico">↗</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Shortcuts Help Overlay -->
+	<div id="help-modal" class="help-overlay" aria-hidden="true" role="dialog">
+		<div class="help-card">
+			<div class="help-head">
+				<h3 data-i18n="help-title">Keyboard shortcuts</h3>
+				<button class="modal-close magnetic" data-close-help aria-label="Close shortcuts">
+					✕
+				</button>
+			</div>
+			<div class="help-body">
+				<div class="help-row">
+					<span data-i18n="h1">Open command palette</span><span class="help-keys"><kbd>⌘/Ctrl
+							K</kbd><kbd>/</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h2">Cycle visual theme</span><span class="help-keys"><kbd>T</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h3">Toggle soundscape</span><span class="help-keys"><kbd>M</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h4">Copy email</span><span class="help-keys"><kbd>C</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h5">Download CV</span><span class="help-keys"><kbd>V</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h6">3D artifact focus</span><span class="help-keys"><kbd>I</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h7">Switch language</span><span class="help-keys"><kbd>L</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h8">Show shortcuts</span><span class="help-keys"><kbd>H</kbd></span>
+				</div>
+				<div class="help-row">
+					<span data-i18n="h9">Close overlays / menu</span><span class="help-keys"><kbd>Esc</kbd></span>
+				</div>
+			</div>
+			<p class="help-foot" data-i18n="help-foot">
+				Shortcuts are ignored while you are typing in a field.
+			</p>
+		</div>
+	</div>
+
+	<!-- Command Palette Modal (Cmd+K) -->
+	<div id="cmdk-modal" class="cmdk-overlay" aria-hidden="true" role="dialog">
+		<div class="cmdk-card">
+			<div class="cmdk-input-wrap">
+				<span class="cmdk-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+						stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+						<circle cx="11" cy="11" r="7" />
+						<path d="m20 20-3.5-3.5" />
+					</svg></span>
+				<input type="text" id="cmdk-input" data-i18n-ph="cmdk-ph"
+					placeholder="Type a section or command (e.g. works, theme, audio, contact)..." />
+				<kbd>ESC</kbd>
+			</div>
+			<div class="cmdk-results" id="cmdk-results">
+				<div class="cmdk-group">
+					<div class="cmdk-label" data-i18n="cmdk-nav">Navigation</div>
+					<div class="cmdk-item" data-action="nav" data-target="#top">
+						<span data-i18n="cmdk-hero">Hero / Beginning</span><kbd>01</kbd>
+					</div>
+					<div class="cmdk-item" data-action="nav" data-target="#identity">
+						<span data-i18n="cmdk-identity">Act I: Identity</span><kbd>02</kbd>
+					</div>
+					<div class="cmdk-item" data-action="nav" data-target="#about">
+						<span data-i18n="cmdk-intent">Act II: The Intent</span><kbd>03</kbd>
+					</div>
+					<div class="cmdk-item" data-action="nav" data-target="#works">
+						<span data-i18n="cmdk-works">Act III: Selected Works</span><kbd>04</kbd>
+					</div>
+					<div class="cmdk-item" data-action="nav" data-target="#experience">
+						<span data-i18n="cmdk-journey">Act IV: The Journey</span><kbd>05</kbd>
+					</div>
+					<div class="cmdk-item" data-action="nav" data-target="#skills">
+						<span data-i18n="cmdk-toolkit">Act V: The Toolkit</span><kbd>06</kbd>
+					</div>
+					<div class="cmdk-item" data-action="nav" data-target="#contact">
+						<span data-i18n="cmdk-contact">Act VI: Contact</span><kbd>07</kbd>
+					</div>
+				</div>
+				<div class="cmdk-group">
+					<div class="cmdk-label" data-i18n="cmdk-cmds">Commands</div>
+					<div class="cmdk-item" data-action="cmd" data-cmd="theme">
+						<span data-i18n="cmdk-theme">Switch Visual Theme</span><kbd>T</kbd>
+					</div>
+					<div class="cmdk-item" data-action="cmd" data-cmd="sound">
+						<span data-i18n="cmdk-sound">Toggle Ambient Soundscape</span><kbd>M</kbd>
+					</div>
+					<div class="cmdk-item" data-action="cmd" data-cmd="lang">
+						<span data-i18n="cmdk-lang">Switch Language</span><kbd>L</kbd>
+					</div>
+					<div class="cmdk-item" data-action="cmd" data-cmd="copy-email">
+						<span data-i18n="cmdk-email">Copy Email to Clipboard</span><kbd>C</kbd>
+					</div>
+					<div class="cmdk-item" data-action="cmd" data-cmd="download-cv">
+						<span data-i18n="cmdk-cv">Download CV</span><kbd>V</kbd>
+					</div>
+					<div class="cmdk-item" data-action="cmd" data-cmd="inspect-3d">
+						<span data-i18n="cmdk-3d">Activate 3D Artifact Focus</span><kbd>I</kbd>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		window.__REDUCED__ = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+		window.__WEBGL__ = (function () {
+			try {
+				var c = document.createElement("canvas");
+				return !!(
+					window.WebGLRenderingContext &&
+					(c.getContext("webgl") || c.getContext("experimental-webgl"))
+				);
+			} catch (e) {
+				return false;
+			}
+		})();
+	</script>
+	<script src="js/vendor/three.min.js"></script>
+	<script src="js/vendor/gsap.min.js"></script>
+	<script src="js/vendor/ScrollTrigger.min.js"></script>
+	<script src="js/scene.js"></script>
+	<script src="js/app.js"></script>
+</body>
+
+</html>

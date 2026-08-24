@@ -1,0 +1,16 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Secrets / env (never commit real credentials)
+.env
+.env.*
+!.env.example
+
+# Python caches
+__pycache__/

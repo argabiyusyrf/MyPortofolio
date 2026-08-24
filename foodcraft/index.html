@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" data-theme="studio">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#ece7dc">
+	<meta name="description" content="Foodcraft — a streamlined food ordering and delivery pipeline. Custom routing controllers, template rendering, and a relational order state machine from kitchen menu to doorstep.">
+	<meta property="og:title" content="Foodcraft — Ordering Pipeline">
+	<meta property="og:description" content="Menu → kitchen → doorstep. A hand-built ordering pipeline in PHP with a clean custom router.">
+	<title>Foodcraft — Ordering Pipeline</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/project.css">
+</head>
+<body>
+
+	<header class="topbar">
+		<a class="topbar-back magnetic" href="/">
+			<span class="ico">←</span>
+			<span>arg<span style="color:var(--accent)">/</span></span>
+		</a>
+		<span class="topbar-tag">case study · 02</span>
+		<button class="theme-toggle" id="theme-toggle" aria-label="Switch theme">Studio</button>
+	</header>
+
+	<main>
+		<section class="pj-hero">
+			<div class="wrap">
+				<p class="pj-kicker" data-reveal><span class="dot"></span>Backend &amp; product engineering</p>
+				<h1 class="pj-title" data-reveal>Food<em>craft.</em></h1>
+				<p class="pj-sub" data-reveal>A streamlined ordering and delivery pipeline where a meal flows from menu to doorstep. Custom routing controllers, template rendering engines, and a relational order state machine — wired into one clean system.</p>
+
+				<div class="pj-meta" data-reveal>
+					<div class="m-item"><span class="m-label">Year</span><span class="m-value">2023</span></div>
+					<div class="m-item"><span class="m-label">Role</span><span class="m-value">Backend &amp; product engineer</span></div>
+					<div class="m-item"><span class="m-label">Stack</span><span class="m-value">PHP · SQL · HTTP Router</span></div>
+				</div>
+
+				<div class="pj-cta" data-reveal>
+					<a class="btn btn-dark" href="mailto:argaabiyyu4@gmail.com"><span>Request demo</span><span class="ico">↗</span></a>
+					<a class="btn btn-ghost" href="/"><span>Back to portfolio</span><span class="ico">→</span></a>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">01</span>
+					<h2 data-reveal>The <em>problem</em> &amp; the decision</h2>
+				</div>
+				<div class="pj-body">
+					<span class="sticky-label" data-reveal>Context</span>
+					<div data-reveal>
+						<p>Ordering systems usually grow into a tangle: a menu here, a cart there, a kitchen view somewhere else — each with its own conventions. Foodcraft exists to prove the opposite: <strong>one clean router, one schema, and a visible state machine for every order.</strong></p>
+						<p>Every order travels a defined path — queued, preparing, out for delivery, delivered. The backend never guesses; it only moves forward, and the client updates without a single heavy library.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">02</span>
+					<h2 data-reveal>Core <em>architecture</em></h2>
+				</div>
+				<div class="pillars">
+					<div class="pillar" data-reveal>
+						<span class="p-index">01 — Routing</span>
+						<h3>Custom regex-based HTTP router</h3>
+						<p>A single routing table maps every URL to a controller. Regex patterns keep the routes readable while staying powerful enough for nested resources.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">02 — Views</span>
+						<h3>Modular controllers &amp; templates</h3>
+						<p>Controllers handle logic; template views handle presentation. A tiny rendering engine keeps them separate and clean to read.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">03 — Data</span>
+						<h3>Relational schema for orders</h3>
+						<p>Dynamic menu options, carts, orders, and deliveries modeled as normalized relations — the state machine lives in the data, not in scattered flags.</p>
+					</div>
+					<div class="pillar" data-reveal>
+						<span class="p-index">04 — Frontend</span>
+						<h3>Optimized DOM updates</h3>
+						<p>Order state changes update the DOM with zero heavy libraries — plain, deliberate JavaScript that keeps the interaction snappy.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">03</span>
+					<h2 data-reveal>The <em>stack</em></h2>
+				</div>
+				<div class="tags" data-reveal>
+					<span>PHP</span><span>Relational SQL</span><span>HTTP Router</span><span>CSS Grid</span><span>RESTful Endpoints</span><span>Template Engine</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="pj-section">
+			<div class="wrap">
+				<div class="pj-section-head">
+					<span class="pj-section-num">04</span>
+					<h2 data-reveal>Measured <em>outcomes</em></h2>
+				</div>
+				<div class="metrics" data-reveal>
+					<div class="metric"><div class="m-num">3</div><div class="m-txt">taps from menu to order confirmed</div></div>
+					<div class="metric"><div class="m-num">4</div><div class="m-txt">order states, modeled in one table</div></div>
+					<div class="metric"><div class="m-num">0</div><div class="m-txt">frontend libraries required</div></div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="pj-foot">
+		<div class="wrap">
+			<h2 class="f-title" data-reveal>Meals, served<br><em>by clean systems.</em></h2>
+			<div class="f-links" data-reveal>
+				<a class="btn btn-dark" href="/">← Back to portfolio</a>
+				<a class="btn btn-ghost" href="mailto:argaabiyyu4@gmail.com">Say hello</a>
+			</div>
+			<p class="f-meta" data-reveal>argabiyusyrf · <a href="https://github.com/argabiyusyrf" target="_blank" rel="noopener">github</a> · <a href="https://instagram.com/argabiyusyrf69" target="_blank" rel="noopener">instagram</a></p>
+		</div>
+	</footer>
+
+	<script src="/js/analytics.js" async></script>
+	<script src="/js/project.js"></script>
+</body>
+</html>
