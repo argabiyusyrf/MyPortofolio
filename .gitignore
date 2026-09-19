@@ -14,3 +14,6 @@ Thumbs.db
 
 # Python caches
 __pycache__/
+
+# Visitor analytics (self-hosted) — sqlite db, never commit
+.data/

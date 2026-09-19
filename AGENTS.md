@@ -27,5 +27,24 @@ Static portfolio site (no build step, no package manager, no tests/CI).
 
 ## Conventions worth knowing
 - i18n (EN/ID) is baked into dictionaries in `js/app.js` and `js/cv-i18n.js`, not a framework.
-- Large binary assets (~9 MB: `my-ava.png/.jpeg`) are committed in the repo root and there is
-  **no `.gitignore` yet** — avoid adding more large binaries without considering repo size.
+- Large binary assets (~9 MB: `my-ava.png/.jpeg`) are committed in the repo root — avoid adding
+  more large binaries without considering repo size.
+
+## Visitor analytics (self-hosted, PHP + SQLite)
+- `js/visitors.js` fires a POST beacon to `visitors/api.php?action=track` once per page load.
+  Include it on any page you want counted (already on `index.html` and `cv.html`).
+- `visitors/api.php` = JSON API with actions `track` (public, rate-limited + deduped),
+  `login`/`logout`/`token` (CSRF-protected), `stats` (auth required). Writes SQLite rows into
+  `.data/visits.sqlite` (gitignored; dir must stay writable by the web user). No IPs stored;
+  identity = random `vid` in `localStorage`. Same `vid` + `path` within 15 min counts as a
+  refresh, not a new visit.
+- `visitors/config.php` = shared constants (DB path, passcode `CODE_HASH`, rate limits,
+  retention). Edit the passcode hash there and all files inherit it.
+- `visitors.php` = the dashboard (SPA). Server-side passcode gate via PHP sessions; passes a
+  CSRF token to the API. Canvas trend chart, hour heatmap, tables. EN/ID toggle persists.
+- `panel.html` = branded gate page. It posts the passcode to `panel-auth.php`, which validates
+  server-side and redirects to `visitors.php` (shared session). The old GoatCounter iframe was
+  removed — GoatCounter blocks iframe embedding (`frame-ancestors 'none'`). `panel-auth.php`
+  works over plain HTTP, unlike the previous client-side `crypto.subtle` gate which needed HTTPS.
+- These are the only PHP files: `visitors.php`, `panel-auth.php`, `visitors/config.php`,
+  `visitors/api.php`.

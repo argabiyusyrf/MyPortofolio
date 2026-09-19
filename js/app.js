@@ -1386,11 +1386,17 @@
 
 	function buildWorks() {
 		var media = wrap ? wrap.querySelectorAll('.work-media') : [];
+		var cards = wrap ? wrap.querySelectorAll('.work-card') : [];
+		var section = document.getElementById('works');
 		if (!track || !wrap) return;
+
+		gsap.set(cards, { clearProps: 'all' });
+		gsap.set(media, { clearProps: 'all' });
 
 		if (worksKill) { worksKill(); worksKill = null; }
 
 		var isStacked = window.innerWidth < 901;
+		if (section) section.classList.toggle('deck', isStacked);
 		var dist = function () {
 			if (isStacked) return 0;
 			return Math.max(0, wrap.scrollWidth - window.innerWidth + (window.innerWidth * 0.12));
@@ -1418,10 +1424,30 @@
 				});
 			});
 		} else {
-			gsap.fromTo(media, { y: 60, scale: 0.92, opacity: 0 }, {
-				y: 0, scale: 1, opacity: 1, stagger: 0.12, ease: 'power2.out',
-				scrollTrigger: { trigger: track, start: 'top 78%', end: 'bottom 40%', scrub: true }
+			var n = cards.length;
+			if (n < 2) return;
+
+			gsap.set(cards, { autoAlpha: 0 });
+			gsap.set(cards[0], { autoAlpha: 1 });
+
+			var tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: wrap,
+					start: 'top top',
+					end: '+=' + (n - 1) * window.innerHeight,
+					pin: true,
+					scrub: true,
+					anticipatePin: 1,
+					snap: { snapTo: 1 / (n - 1), duration: { min: 0.25, max: 0.6 }, delay: 0.08 }
+				}
 			});
+
+			for (var i = 1; i < n; i++) {
+				tl.to(cards[i - 1], { autoAlpha: 0, yPercent: -6, duration: 0.5, ease: 'power1.in' }, i - 0.5)
+					.fromTo(cards[i], { autoAlpha: 0, yPercent: 8 }, {
+						autoAlpha: 1, yPercent: 0, duration: 0.5, ease: 'power1.out'
+					}, i - 0.5);
+			}
 		}
 
 		worksKill = function () {

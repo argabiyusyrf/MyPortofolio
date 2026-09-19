@@ -3,9 +3,10 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="robots" content="noindex, nofollow" />
 	<title>Panel · argabiyusyrf</title>
 	<style>
-		:root { --ink:#1a1814; --muted:#8a8175; --bg:#0e0d0b; --line:#2a2722; }
+		:root { --ink:#1a1814; --muted:#8a8175; --bg:#0e0d0b; --line:#2a2722; --accent:#a3765a; }
 		* { box-sizing: border-box; }
 		html, body { height: 100%; margin: 0; }
 		body {
@@ -21,82 +22,25 @@
 			background: #16140f; border: 1px solid var(--line); border-radius: 10px;
 			color: #e8e2d4; outline: none;
 		}
-		#code:focus { border-color: #a3765a; }
+		#code:focus { border-color: var(--accent); }
 		#enter {
 			margin-top: 1rem; width: 100%; padding: .8rem; cursor: pointer;
-			background: #a3765a; color: #15120d; border: 0; border-radius: 10px;
+			background: var(--accent); color: #15120d; border: 0; border-radius: 10px;
 			font-weight: 600; letter-spacing: .04em;
 		}
 		#err { color: #d98b6a; min-height: 1.2em; margin-top: .8rem; font-size: .85rem; }
-		#dash { position: fixed; inset: 0; }
-		#dash iframe { width: 100%; height: 100%; border: 0; }
 	</style>
 </head>
 <body>
 	<div id="gate">
 		<h1>Panel</h1>
 		<p>Masukkan kunci panel</p>
-		<input id="code" type="password" placeholder="kode panel" autocomplete="off" />
-		<button id="enter">Buka</button>
-		<p id="err"></p>
+		<form method="post" action="panel-auth.php" autocomplete="off">
+			<input id="code" name="code" type="password" placeholder="kode panel" autocomplete="off" />
+			<button id="enter" type="submit">Buka</button>
+		</form>
+		<p id="err"><?= (($_GET['err'] ?? '') === '1') ? 'Kode salah.' : '' ?></p>
 	</div>
-
-	<div id="dash" hidden>
-		<iframe id="frame" title="Analytics dashboard" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-	</div>
-
-	<script>
-		/*
-		 * Panel gate — single shared passcode (no user accounts / auth system).
-		 * To change the code: edit PASSCODE, then regenerate CODE_HASH with:
-		 *   node -e "const c=require('crypto');console.log(c.createHash('sha256').update('YOURCODE').digest('hex'))"
-		 * DASHBOARD_URL: GoatCounter public dashboard (https://SITE.goatcounter.com/)
-		 *   or a Plausible shared link (https://plausible.io/share/SITE?auth=TOKEN).
-		 */
-		var PASSCODE = 'bfiFoRcdIgXXuKh'; // generated strong passcode — change this if you prefer your own
-		var CODE_HASH = '459277fd23dfcbb1de3d3e0c1695bbd8bbb8429c7e2a6f46af35286f31616c1a'; // sha256 of PASSCODE
-		var DASHBOARD_URL = 'https://argabiyusyrf.goatcounter.com/';
-
-		var gate = document.getElementById('gate');
-		var dash = document.getElementById('dash');
-		var frame = document.getElementById('frame');
-		var input = document.getElementById('code');
-		var err = document.getElementById('err');
-
-		function sha256(str) {
-			return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
-				.then(function (buf) {
-					return Array.from(new Uint8Array(buf))
-						.map(function (b) { return b.toString(16).padStart(2, '0'); })
-						.join('');
-				});
-		}
-
-		function unlock() {
-			if (DASHBOARD_URL.indexOf('REPLACE') !== -1) {
-				err.textContent = 'Set DASHBOARD_URL di panel.html dulu.';
-				return;
-			}
-			dash.hidden = false;
-			gate.hidden = true;
-			frame.src = DASHBOARD_URL;
-		}
-
-		function attempt() {
-			err.textContent = '';
-			var val = input.value;
-			if (!val) { err.textContent = 'Masukkan kode.'; return; }
-			sha256(val).then(function (h) {
-				if (h === CODE_HASH) unlock();
-				else err.textContent = 'Kode salah.';
-			}).catch(function () {
-				err.textContent = 'Perlu HTTPS untuk membuka panel.';
-			});
-		}
-
-		document.getElementById('enter').addEventListener('click', attempt);
-		input.addEventListener('keydown', function (e) { if (e.key === 'Enter') attempt(); });
-		input.focus();
-	</script>
+	<script>document.getElementById('code').focus();</script>
 </body>
 </html>

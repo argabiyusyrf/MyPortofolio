@@ -411,13 +411,76 @@ main {
 
 /* ---------- responsive ---------- */
 
-@media (max-width: 900px) {
+/* Tablet & small laptops: collapse the two-column section layout */
+@media (max-width: 1080px) {
 	.pj-section-head, .pj-body { grid-template-columns: 1fr; gap: 14px; }
 	.pj-section-head { margin-bottom: 4vh; }
-	.pillars { grid-template-columns: 1fr; }
-	.metrics { grid-template-columns: 1fr; gap: 30px; }
+	.pj-body .sticky-label { margin-bottom: 2px; }
+}
+
+/* Tablet portrait */
+@media (max-width: 900px) {
 	.pj-hero { padding: 10vh 0 6vh; }
-	.pj-meta { gap: 22px; }
+	.pillars { grid-template-columns: 1fr 1fr; }
+	.metrics { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+	.pj-meta { gap: 24px; }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+	.topbar {
+		padding: 14px 20px;
+		padding-top: calc(14px + env(safe-area-inset-top, 0px));
+	}
+	.topbar-tag { display: none; }
+	.topbar-back { font-size: 10px; letter-spacing: 0.12em; }
+	.theme-toggle { padding: 7px 12px; font-size: 9.5px; }
+
+	main { padding-top: 64px; }
+
+	.pj-hero { padding: 8vh 0 6vh; }
+	.pj-kicker { font-size: 9.5px; margin-bottom: 20px; flex-wrap: wrap; }
+	.pj-title { font-size: clamp(2.1rem, 11vw, 3rem); margin-bottom: 22px; }
+	.pj-sub { font-size: 1rem; line-height: 1.6; margin-bottom: 32px; }
+
+	.pj-meta { flex-direction: column; gap: 0; width: 100%; }
+	.pj-meta .m-item {
+		flex-direction: row;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 14px;
+		padding: 14px 2px;
+		border-bottom: 1px solid var(--line);
+	}
+	.pj-meta .m-item:last-child { border-bottom: 0; }
+
+	.pj-cta { flex-direction: column; gap: 12px; margin-top: 34px; }
+	.pj-cta .btn { width: 100%; justify-content: space-between; }
+
+	.pj-section { padding: 9vh 0; }
+	.pillars { grid-template-columns: 1fr; gap: 14px; }
+	.pillar { padding: 24px; }
+
+	.metrics { grid-template-columns: 1fr; gap: 26px; }
+	.metric { padding-top: 16px; }
+
+	.pj-foot { padding: 9vh 0; }
+	.pj-foot .f-links { flex-direction: column; align-items: stretch; }
+	.pj-foot .f-links .btn { width: 100%; justify-content: center; }
+	.pj-foot .f-meta { margin-top: 44px; line-height: 2; }
+}
+
+/* Very narrow screens */
+@media (max-width: 380px) {
+	.tags span { padding: 7px 11px; font-size: 9px; letter-spacing: 0.12em; }
+	.pj-title { font-size: 2rem; }
+	.btn { padding: 13px 20px; font-size: 10.5px; }
+}
+
+/* Touch devices: drop hover shifts */
+@media (hover: none) {
+	.pillar:hover { transform: none; }
+	.topbar-back:hover { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
